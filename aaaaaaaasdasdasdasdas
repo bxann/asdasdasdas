@@ -1,0 +1,541 @@
+Wait(3)
+-- Variaveis Normais
+getfenv().QuitarSeVidaMinima = {VidaMinima = 2,Quitar = true}
+local NomeDoPlayer = game:GetService("Players").LocalPlayer.Name
+-- Use .. para junta uma string com a outra
+local Texto = "BRG AutoBroly\n" .. "User: " .. NomeDoPlayer
+local PessoasNaWhitelist = {
+	"BRGxBanidoo",
+	"BRGxGabrielz",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+
+}
+local Blacklist = {
+	"",
+	"K1ngSaphyre",
+	"iiRisingDxys",
+	"",
+	"",
+	"",
+	"rp123r101",
+
+
+}
+
+
+repeat wait() until game:IsLoaded()
+local HRP = nil
+repeat 
+	game:GetService("RunService").Heartbeat:Wait()
+	pcall(function()
+		HRP = game:GetService("Players").LocalPlayer.Character
+	end)
+until HRP
+
+if table.find(Blacklist,game:GetService("Players").LocalPlayer.Name) then
+	coroutine.resume(coroutine.create(function()
+		for _=1,100 do
+			game:GetService("Players").LocalPlayer.Backpack.ServerTraits.Input:FireServer()
+		end
+	end))
+	wait(0.5)
+	coroutine.resume(coroutine.create(function()
+		game:GetService("Players").LocalPlayer:Kick("Voçê foi estuprado pela BRG, compre esse script, seu homem pobreza")
+	end))
+	return
+end
+if not table.find(PessoasNaWhitelist,game:GetService("Players").LocalPlayer.Name) then
+	coroutine.resume(coroutine.create(function()
+		game:GetService("Players").LocalPlayer:Kick("Esta Conta Não Tem Permissão Para Usar Esse Script.\nSaia Pobre!!!")
+	end))
+	wait(0.2)
+	while true do end
+	return
+end
+local LP = game:GetService("Players").LocalPlayer
+local LPMouse = LP:GetMouse()
+local Text = Drawing.new("Text")
+Text.Font = 3
+Text.Text = "AutoBroly Banidinho" .. "\n" .. "User: " .. NomeDoPlayer
+Text.Visible = true
+Text.Size = 30
+local HSVINIT = 0
+game:GetService("RunService").RenderStepped:Connect(function()
+	HSVINIT += 0.002
+	Text.Color = Color3.fromHSV(HSVINIT,1,1)
+	if HSVINIT >= 1 then
+		HSVINIT = 0
+	end
+	Text.Position = Vector2.new(LPMouse.ViewSizeX-(Text.TextBounds.X+1),LPMouse.ViewSizeY-(Text.TextBounds.Y+1))
+end)
+
+function TweenPlayer(CF,Yeild,Vel)
+	local HRP = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RootPart
+	local TweenService = game:GetService("TweenService")
+	local TVel = 100
+	if Vel then
+		TVel = Vel
+	else 
+		TVel = getfenv().Velocidade
+	end
+	local Velocity = (HRP.Position - CF.Position).Magnitude/TVel
+	local TweenBase = TweenService:Create(HRP,TweenInfo.new(Velocity,0,2),{CFrame = CF})
+	local HumanoidDiedConn = nil
+	local TweenFinishedConn = nil
+	local TweenFinished = false
+	local HumanoidDied = false
+	TweenBase:Play()
+
+	local UpdaterConn = nil
+	UpdaterConn = game:GetService("RunService").Heartbeat:Connect(function()
+		pcall(function()
+			HRP = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RootPart
+		end)
+		if not HRP then
+			return
+		end
+		HRP.AssemblyLinearVelocity = Vector3.new(math.random(-1000,1000)/1000,math.random(-1000,1000)/1000,math.random(-1000,1000)/1000)
+	end)
+
+
+	TweenBase.Completed:Connect(function()
+		TweenFinished = true
+	end)
+	local Humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+	Humanoid.Died:Connect(function()
+		HumanoidDied = true
+	end)
+
+	if Yeild == true then
+		repeat game:GetService("RunService").Heartbeat:Wait() until TweenFinished == true or HumanoidDied == true
+	end
+	pcall(function()
+		TweenBase:Cancel()
+	end)
+	pcall(function()
+		UpdaterConn:Disconnect()
+	end)
+	pcall(function()
+		TweenBase:Disconnect()
+	end)
+	pcall(function()
+		Humanoid:Disconnect()
+	end)
+
+end
+
+local BrolyHumanoid = nil
+pcall(function()
+	BrolyHumanoid = game:GetService("Workspace").Live["Broly BR"]:FindFirstChildOfClass("Humanoid")
+end)
+
+local InitNoSlow = false
+coroutine.resume(coroutine.create(function()
+	repeat wait() until InitNoSlow == true
+	while wait() do
+		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+			if v.Name == "Justice Combination" then
+				local action = game.Players.LocalPlayer.Character:WaitForChild("Action")
+				if action then wait() action:Destroy() end end
+			if v.Name == "Action" then
+				v:Destroy()
+			end
+			if v.Name == "Attacking" then
+				v:Destroy()
+			end
+			if v.Name == "Using" then
+				v:Destroy()
+			end
+			if v.Name == "hyper" then
+				v:Destroy()
+			end
+			if v.Name == "Hyper" then
+				v:Destroy()
+			end
+			if v.Name == "heavy" then
+				v:Destroy()
+			end
+			if v.Name == "KiBlasted" then
+				v:Destroy()
+			end
+			if v.Name == "Tele" then
+				v:Destroy()
+			end
+			if v.Name == "tele" then
+				v:Destroy()
+			end
+			if v.Name == "Killed" then
+				v:Destroy()
+			end
+			if v.Name == "Slow" then
+				v:Destroy()
+			end
+			if v.Name == "Block" and v.Value == true then
+				v.Value = false
+			end
+		end
+	end
+end))
+
+function Invis()
+
+	local BlacklistedPartsNameTable = 
+		{
+			"Head",
+			"Torso",
+			"Humanoid",
+			"HumanoidRootPart",
+			"Neck",
+			"RootAttchment",
+			"RootJoint",
+			"LowerTorso",
+			"UpperTorso"
+		}
+
+	for _,i in ipairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+		if not table.find(BlacklistedPartsNameTable,i.Name) then
+			pcall(function()
+				i:Destroy()
+			end)
+		end
+	end
+
+end
+
+if tostring(game.PlaceId) == "536102540" and getfenv().EarthBroly == true then
+	pcall(function()
+		game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack["Flash Strike"])
+		game.Players.LocalPlayer.Character["Flash Strike"].Activator.Animation:Destroy()
+		game.Players.LocalPlayer.Character["Flash Strike"]:Activate()
+	end)
+
+	coroutine.resume(coroutine.create(function()
+		while true do
+			wait()
+			pcall(function()
+				--[[game:GetService("Players").LocalPlayer.Character.Head.Anchored = true
+				game:GetService("Players").LocalPlayer.Character.LeftFoot.Anchored = true
+				game:GetService("Players").LocalPlayer.Character.RightFoot.Anchored = true
+				game:GetService("Players").LocalPlayer.Character.LeftLowerLeg.Anchored = true
+				game:GetService("Players").LocalPlayer.Character.LeftUpperLeg.Anchored = true
+				game:GetService("Players").LocalPlayer.Character.RightLowerLeg.Anchored = true
+				game:GetService("Players").LocalPlayer.Character.RightUpperLeg.Anchored = true]]--
+			end)
+		end
+	end))
+	wait(0.3)
+	coroutine.resume(coroutine.create(function()
+		while wait() do
+			pcall(function()
+				TweenPlayer(CFrame.new(2753, 3945, -2272),true,2000)
+			end)
+		end
+	end))
+
+elseif tostring(game.PlaceId) == "2050207304" or BrolyHumanoid then
+	if getfenv().PessoasPermitidas == false then
+		if #game:GetService("Players"):GetChildren() > 1 then
+			coroutine.resume(coroutine.create(function()
+				while wait() do
+					pcall(function()
+						if getfenv().EarthBroly == false then
+							game:GetService("TeleportService"):Teleport(3565304751, game:GetService("Players").LocalPlayer)
+						else
+							game:GetService("TeleportService"):Teleport(536102540, game:GetService("Players").LocalPlayer)
+						end	
+					end)
+				end
+			end))
+			return
+		end
+	end
+	wait(2)
+	local BrolyHumanoid = game:GetService("Workspace").Live["Broly BR"]:FindFirstChildOfClass("Humanoid")
+	local BrolyHRP = game:GetService("Workspace").Live["Broly BR"]:FindFirstChild("HumanoidRootPart") or BrolyHumanoid.RootPart
+	local Rot = 0
+	local LPHRP = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RootPart
+	local UsedDragonCrsuh = false
+	local EnergyLow = false
+	local VIM = game:GetService("VirtualInputManager")
+	local Camera = game:GetService("Workspace").CurrentCamera
+	Camera.FieldOfView = 120
+
+
+	if getfenv().TempoParaCarregar == 0 then 
+		game.Players.LocalPlayer.Backpack.ServerTraits.Input:FireServer({[1] = "xoff"},CFrame.new(0,0,0),nil,false)
+	end
+
+	game.Players.LocalPlayer.Backpack.ServerTraits.Input:FireServer({[1] = "x"},CFrame.new(0,0,0),nil,false)
+	wait(getfenv().TempoParaCarregar)
+	game.Players.LocalPlayer.Backpack.ServerTraits.Input:FireServer({[1] = "xoff"},CFrame.new(0,0,0),nil,false)
+	game:GetService("Players").LocalPlayer.Backpack.ServerTraits.Transform:FireServer(getfenv().TeclaParaTransformar)
+	wait(0.5)	
+	InitNoSlow = true
+	local UDC = false
+	coroutine.resume(coroutine.create(function()
+		repeat wait() until UDC == true
+		wait(1.5)
+		pcall(function()
+			local LPChar = game:GetService("Players").LocalPlayer.Character
+			LPChar:FindFirstChildOfClass("Humanoid"):EquipTool(game:GetService("Players").LocalPlayer.Backpack[getfenv().Grab])
+			LPChar[getfenv().Grab].Activator.Flip:Destroy()
+			LPChar[getfenv().Grab]:Activate()
+		end)
+		wait(0.5)
+		pcall(function()
+			local LPChar = game:GetService("Players").LocalPlayer.Character
+			LPChar:FindFirstChildOfClass("Humanoid"):EquipTool(game:GetService("Players").LocalPlayer.Backpack[getfenv().Grab])
+			LPChar[getfenv().Grab]:Activate()
+		end)
+		pcall(function()
+			if getfenv().FreezeDoublexp == true then
+				game:GetService("RunService").Stepped:Connect(function()
+					if game:GetService("Players").LocalPlayer.Character:FindFirstChild("True") then
+						game:GetService("Players").LocalPlayer.Character:FindFirstChild("True"):Destroy()
+					end
+				end)
+			end
+		end)
+		UsedDragonCrsuh = true
+	end))
+	coroutine.resume(coroutine.create(function()
+		while BrolyHumanoid.Health > 0 do
+			Rot += 0.1
+			local LPH = nil
+			pcall(function()
+				LPH = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+			end)
+			--game:GetService("RunService").Heartbeat:Wait()
+			TweenPlayer(BrolyHRP.CFrame:ToWorldSpace(CFrame.new(0,0,getfenv().DistanciaDoNPC or 100)),true)
+			UDC = true
+			pcall(function()
+				BrolyHRP = game:GetService("Workspace").Live["Broly BR"]:FindFirstChild("HumanoidRootPart") or BrolyHumanoid.RootPart
+			end)
+			pcall(function()
+				LPHRP = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RootPart
+			end)
+		end
+	end))
+	coroutine.resume(coroutine.create(function()
+
+		while BrolyHumanoid.Health > 0 do
+			game:GetService("RunService").Heartbeat:Wait()
+			local LPH = nil
+			pcall(function()
+				LPH = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+			end)
+			coroutine.resume(coroutine.create(function()
+				if (LPH.Health/LPH.MaxHealth)*100 < 20 then
+					game:GetService("Players").LocalPlayer.Backpack.ServerTraits.Transform:FireServer("h")
+					wait(0.1)
+				end
+			end))
+			if game:GetService("Players").LocalPlayer.PlayerGui.HUD.FullSize.Ki.Bar.AbsoluteSize.X < 10 then
+				EnergyLow = true
+			else
+				EnergyLow = false
+			end 
+		end
+	end))
+	coroutine.resume(coroutine.create(function()
+
+		while BrolyHumanoid.Health > 0 do
+			for _,i in pairs(getfenv().Golpes) do
+				if UsedDragonCrsuh == false then
+					break
+				end
+				if EnergyLow == true and getfenv().AutoClick == true then
+					game.Players.LocalPlayer.Backpack.ServerTraits.Input:FireServer({[1] = "m2"},CFrame.new(0,0,0),nil,false)
+					continue
+				end
+
+				coroutine.resume(coroutine.create(function()
+					pcall(function()
+						local LPChar = game:GetService("Players").LocalPlayer.Character
+						LPChar:FindFirstChildOfClass("Humanoid"):EquipTool(game:GetService("Players").LocalPlayer.Backpack[i])
+						LPChar[i]:Activate()
+					end)
+				end))
+				game:GetService("RunService").RenderStepped:Wait()
+			end
+
+			game:GetService("Players").LocalPlayer.Backpack.ServerTraits.EatSenzu:FireServer(true)
+			game:GetService("RunService").Heartbeat:Wait()
+		end
+	end))
+	pcall(function()
+		while BrolyHumanoid.Health > 0 do
+			game:GetService("RunService").Heartbeat:Wait()
+			if not BrolyHumanoid then
+				break
+			end
+			if not BrolyHumanoid.Parent then
+				break
+			end
+			local LPH = nil
+			pcall(function()
+				LPH = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+			end)
+			Rot += 0.1
+			if not LPH.Parent then
+				break
+			elseif not LPH:IsDescendantOf(game) then
+				break
+			end
+			local THRP = BrolyHRP.Parent:FindFirstChild("UpperTorso") or BrolyHRP
+			local Camera = game:GetService("Workspace").CurrentCamera
+			Camera.CFrame = CFrame.new(Camera.CFrame.Position,THRP.Position)
+			Camera.FieldOfView = 120
+			if getfenv().QuitarSeVidaMinima then
+				if getfenv().QuitarSeVidaMinima.VidaMinima then
+					if getfenv().QuitarSeVidaMinima.Quitar then
+						if (LPH.Health/LPH.MaxHealth)*100 < getfenv().QuitarSeVidaMinima.VidaMinima then
+							while wait() do
+								pcall(function()
+									if getfenv().EarthBroly == false then
+										game:GetService("TeleportService"):Teleport(3565304751, game:GetService("Players").LocalPlayer)
+									else
+										game:GetService("TeleportService"):Teleport(536102540, game:GetService("Players").LocalPlayer)
+									end	
+								end)
+							end
+						end
+					end
+				end
+			end
+
+		end
+	end)
+	wait(1)
+	coroutine.resume(coroutine.create(function()
+		while wait() do
+			pcall(function()
+				if getfenv().EarthBroly == false then
+					game:GetService("TeleportService"):Teleport(3565304751, game:GetService("Players").LocalPlayer)
+				else
+					game:GetService("TeleportService"):Teleport(536102540, game:GetService("Players").LocalPlayer)
+				end	
+			end)
+		end
+	end))
+
+elseif tostring(game.PlaceId) == "3565304751" then
+
+	local HRP = nil
+	repeat 
+		game:GetService("RunService").Heartbeat:Wait()
+		pcall(function()
+			HRP = game:GetService("Players").LocalPlayer.Character
+		end)
+	until HRP
+	wait(1)
+
+	while true do
+		game:GetService("RunService").Heartbeat:Wait()
+		local Last = nil
+		local Table = game:GetService("Workspace"):GetChildren()
+		while true do
+			--Table = game:GetService("Workspace"):GetChildren()
+			game:GetService("RunService").Heartbeat:Wait()
+			local Rand = math.random(1,#Table)
+			local i = Table[Rand]
+			table.remove(Table,Rand)
+			if i.ClassName ~= "Model" then
+				continue
+			end
+			if i == Last then
+				continue
+			end
+			if i.Name == "BrolyTeleport" and i.ClassName == "Model" then
+				local CF,Size = i:GetBoundingBox()
+				local HRP = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RootPart
+				local DividedPos = CF.Position/Vector3.new(2,2,2)
+				local Region = Region3.new(DividedPos*Vector3.new(-1,-1,-1),DividedPos)
+				TweenPlayer(HRP.CFrame+Vector3.new(-1124, 0, -676),true,2000)
+				wait(0.1)
+				pcall(function()
+					game:GetService("Players").LocalPlayer.Character.LowerTorso:Destroy()
+				end)
+				coroutine.resume(coroutine.create(function()
+					while true do
+						wait()
+						pcall(function()
+							game:GetService("Players").LocalPlayer.Character.Head.Anchored = true
+							game:GetService("Players").LocalPlayer.Character.LeftFoot.Anchored = true
+							game:GetService("Players").LocalPlayer.Character.RightFoot.Anchored = true
+							game:GetService("Players").LocalPlayer.Character.LeftLowerLeg.Anchored = true
+							game:GetService("Players").LocalPlayer.Character.LeftUpperLeg.Anchored = true
+							game:GetService("Players").LocalPlayer.Character.RightLowerLeg.Anchored = true
+							game:GetService("Players").LocalPlayer.Character.RightUpperLeg.Anchored = true
+						end)
+					end
+				end))
+				wait(0.1)
+				TweenPlayer(HRP.CFrame+Vector3.new(0,-20,0),true)
+				TweenPlayer(CF+Vector3.new(0,-20,0),true,2000)
+				local BreakFor = false
+				local BreakWhile = false
+				game:GetService("RunService").Heartbeat:Wait()
+				while BreakWhile == false do
+					if getfenv().PessoasPermitidas == false then 
+						local Parts = game:GetService("Workspace"):FindPartsInRegion3(Region,nil,math.huge)
+						local Table = {}
+						for _,i in pairs(game:GetService("Players"):GetChildren()) do
+							if i == game:GetService("Players").LocalPlayer then
+								continue
+							end
+							for _,k in pairs(Parts) do
+								if k:IsDescendantOf(i.Character) then
+									BreakWhile = true
+								end
+							end
+						end
+
+					end
+					game:GetService("RunService").Heartbeat:Wait()
+					TweenPlayer(CF,true)
+				end
+				Last = i
+				break
+			end
+		end
+	end
+else
+	pcall(function()
+		if getfenv().FreezeDoublexp == true then
+			game:GetService("RunService").Stepped:Connect(function()
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("True") then
+					game:GetService("Players").LocalPlayer.Character:FindFirstChild("True"):Destroy()
+				end
+			end)
+		end
+	end)
+	coroutine.resume(coroutine.create(function()
+		while wait() do
+			pcall(function()
+				game:GetService("TeleportService"):Teleport(3565304751, game:GetService("Players").LocalPlayer)
+			end)
+		end
+	end))
+	return
+end
+--BrolyTeleport
+--game:GetService("TeleportService"):Teleport(3565304751, game:GetService("Players").LocalPlayer)
